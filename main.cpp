@@ -27,7 +27,7 @@ DigitalOut alarmLed(LED1);
 DigitalOut incorrectCodeLed(LED3);
 DigitalOut systemBlockedLed(LED2);
 
-DigitalInOut sirenPin(PE_10);
+DigitalInOut sirenPin(PE_10); // ¿No es lo mismo que D40? ¿Por que usan PE_10?
 
 UnbufferedSerial uartUsb(USBTX, USBRX, 115200);
 
