@@ -178,10 +178,11 @@ void alarmActivationUpdate()
 void alarmDeactivationUpdate()
 {
     if ( numberOfIncorrectCodes < 5 ) {
-        if ( aButton && bButton && cButton && dButton && !enterButton ) {
+        if ( keypad & keypad.mask()  && !enterButton ) { //Antes: aButton && bButton && cButton && dButton && !enterButton
             incorrectCodeLed = OFF;
         }
         if ( enterButton && !incorrectCodeLed && alarmState ) {
+            // Lee el estado de los botones del bus keypad usando máscaras
             buttonsPressed[0] = keypad[0]; // Lee el estado del primer botón en D4. Antes: aButton;
             buttonsPressed[1] = keypad[1]; // Lee el estado del segundo botón en D5. Antes: bButton;
             buttonsPressed[2] = keypad[2]; // Lee el estado del tercer botón en D6. Antes: cButton;
