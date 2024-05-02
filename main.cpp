@@ -17,10 +17,11 @@
 
 DigitalIn enterButton(BUTTON1);
 DigitalIn alarmTestButton(D2);
-DigitalIn aButton(D4);
-DigitalIn bButton(D5);
-DigitalIn cButton(D6);
-DigitalIn dButton(D7);
+//DigitalIn aButton(D4);
+//DigitalIn bButton(D5);
+//DigitalIn cButton(D6);
+//DigitalIn dButton(D7);
+BusIn keypad(D4, D5, D6, D7);
 DigitalIn mq2(PE_12);
 
 DigitalOut alarmLed(LED1);
@@ -88,10 +89,15 @@ int main()
 void inputsInit()
 {
     alarmTestButton.mode(PullDown);
-    aButton.mode(PullDown);
-    bButton.mode(PullDown);
-    cButton.mode(PullDown);
-    dButton.mode(PullDown);
+    //aButton.mode(PullDown);
+    //bButton.mode(PullDown);
+    //cButton.mode(PullDown);
+    //dButton.mode(PullDown);
+
+    // Configuracion del bus de entrada (keypad)
+    //!< @note Se dejó de declarar las entradas una por una
+    //!        Ahora declaramos un BusIn y colocamos todas las entradas como un BUS
+    keypad.mode(PullDown);
     sirenPin.mode(OpenDrain);
     sirenPin.input();
 }
@@ -176,10 +182,10 @@ void alarmDeactivationUpdate()
             incorrectCodeLed = OFF;
         }
         if ( enterButton && !incorrectCodeLed && alarmState ) {
-            buttonsPressed[0] = aButton;
-            buttonsPressed[1] = bButton;
-            buttonsPressed[2] = cButton;
-            buttonsPressed[3] = dButton;
+            buttonsPressed[0] = keypad[0]; // Lee el estado del primer botón en D4. Antes: aButton;
+            buttonsPressed[1] = keypad[1]; // Lee el estado del segundo botón en D5. Antes: bButton;
+            buttonsPressed[2] = keypad[2]; // Lee el estado del tercer botón en D6. Antes: cButton;
+            buttonsPressed[3] = keypad[3]; // Lee el estado del cuarto botón en D7. Antes: dButton;
             if ( areEqual() ) {
                 alarmState = OFF;
                 numberOfIncorrectCodes = 0;
