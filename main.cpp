@@ -2,6 +2,7 @@
 
 #include "mbed.h"
 #include "arm_book_lib.h"
+#include <cstdio>
 
 //=====[Defines]===============================================================
 
@@ -17,11 +18,17 @@
 
 DigitalIn enterButton(BUTTON1);
 DigitalIn alarmTestButton(D2);
+
+//Codigo original:
+
 //DigitalIn aButton(D4);
 //DigitalIn bButton(D5);
 //DigitalIn cButton(D6);
 //DigitalIn dButton(D7);
+
+// Modificacion:
 BusIn keypad(D4, D5, D6, D7);
+
 DigitalIn mq2(PE_12);
 
 DigitalOut alarmLed(LED1);
